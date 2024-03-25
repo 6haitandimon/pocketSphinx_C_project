@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.13)
+
+project(SpeachRecognition ASM C)
+
+set(CMAKE_CXX_STANDARD 20)
+
+file(GLOB SRC_FILES ${CMAKE_SOURCE_DIR}/src/*.c)
+
+add_executable(SpeachRecognition
+        ${SRC_FILES}
+)  
+
+include_directories(/usr/local/include)
+target_link_libraries(SpeachRecognition /usr/local/lib/libpocketsphinx.a /usr/local/lib/python3.11/site-packages/_sounddevice_data/portaudio-binaries/libportaudio.dylib)
