@@ -123,14 +123,14 @@ int main(int argc, char * argv[]){
                     ps_start_utt(decoder);
                     
                 } 
-                printf("strstr:  %s\n", strstr(hyp, "cпасибо"));
-                if(kws && hyp != NULL && (strstr(hyp, "cпасибо") != NULL)){
-                      ps_end_utt(decoder);
-                        if(ps_activate_search(decoder, "keyword_search") != 0)
-                            E_FATAL("ERROR: Cannot switch.\n");
-                        kws = 0;
-                        printf("(switch to listening model)\n");
-                        ps_start_utt(decoder);
+
+                if(kws && hyp != NULL && (strncmp(hyp, "спасибо", 7) == 0)){
+                    ps_end_utt(decoder);
+                    if(ps_activate_search(decoder, "keyword_search") != 0)
+                        E_FATAL("ERROR: Cannot switch.\n");
+                    kws = 0;
+                    printf("(switch to listening model)\n");
+                    ps_start_utt(decoder);
                  }
             }
             if(!ps_endpointer_in_speech(ep)){
