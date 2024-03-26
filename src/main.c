@@ -122,29 +122,21 @@ int main(int argc, char * argv[]){
                     printf("LISTENING...  (switch to jsgf_model)\n");
                     ps_start_utt(decoder);
                     
-                }else if(kws && hyp != NULL){
-                    if (strncmp(hyp, "cпасибо", 7) == 0){
-                        ps_end_utt(decoder);
+                } 
+                printf("strstr:  %s\n", strstr(hyp, "cпасибо"));
+                if(kws && hyp != NULL && (strstr(hyp, "cпасибо") != NULL)){
+                      ps_end_utt(decoder);
                         if(ps_activate_search(decoder, "keyword_search") != 0)
                             E_FATAL("ERROR: Cannot switch.\n");
                         kws = 0;
                         printf("(switch to listening model)\n");
                         ps_start_utt(decoder);
-                    }else{
-                        // fprintf(stderr, "PARTIAL RESULT: %s\n", hyp);
-                        // fflush(stderr);
-                        // ps_end_utt(decoder);
-                        // sleep(1);
-                        // ps_start_utt(decoder);
-                        // strcpy(buff, hyp);
-                    }
                  }
             }
             if(!ps_endpointer_in_speech(ep)){
                         if(hyp != NULL){
                             fprintf(stderr, "PARTIAL RESULT: %s\n", hyp);
                             fflush(stderr);
-                            // memset(buff, 0, strlen(buff));
                         }
                         ps_end_utt(decoder);
                         canselListeningFlags = 1;
